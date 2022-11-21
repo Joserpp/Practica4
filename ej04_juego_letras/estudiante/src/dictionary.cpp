@@ -154,8 +154,10 @@ int Dictionary::getTotalUsages(const char c){
 //                                 Iterator                                  //
 ///////////////////////////////////////////////////////////////////////////////
 
-/*Dictionary::iterator::iterator() {
+Dictionary::iterator::iterator() {
 
+  curr_word="";
+    
 }
 
 Dictionary::iterator::iterator(tree<char_info>::const_preorder_iterator iter) {
@@ -184,7 +186,7 @@ Dictionary::iterator Dictionary::begin() const {
 
 Dictionary::iterator Dictionary::end() const {
 
-}*/
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 //                            Letters Iterator                               //
