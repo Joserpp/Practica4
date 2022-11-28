@@ -157,7 +157,7 @@ int Dictionary::getTotalUsages(const char c){
 Dictionary::iterator::iterator() {
 
   curr_word="";
-    
+  iter=tree<char_info>::const_preorder_iterator iter;
 }
 
 Dictionary::iterator::iterator(tree<char_info>::const_preorder_iterator iter) {
