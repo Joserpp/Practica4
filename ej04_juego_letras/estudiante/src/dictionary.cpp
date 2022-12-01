@@ -154,16 +154,11 @@ int Dictionary::getTotalUsages(const char c){
 //                                 Iterator                                  //
 ///////////////////////////////////////////////////////////////////////////////
 
-Dictionary::iterator::iterator() {
+Dictionary::iterator::iterator(): iter() {}
 
-  curr_word="";
-  iter=tree<char_info>::const_preorder_iterator();
-}
+Dictionary::iterator::iterator(tree<char_info>::const_preorder_iterator otro): iter(otro) {
 
-Dictionary::iterator::iterator(tree<char_info>::const_preorder_iterator otro) {
-  
-  iter=tree<char_info>::const_preorder_iterator(otro);
-  curr_word = (*otro).character;
+  //curr_word = (*iter).character;
 }
 
 
@@ -173,6 +168,15 @@ std::string Dictionary::iterator::operator*() {
 }
 
 Dictionary::iterator &Dictionary::iterator::operator++() {
+
+  for(tree<char_info>::const_preorder_iterator otro=iter;(*otro).valid_word==true; ++otro){
+    
+    //Falta comprobacion del nivel en el que estamos hay una funcion get level()
+    
+    if()
+    curr_word+=(*otro).character;
+    
+  }
 
 }
 
@@ -186,7 +190,7 @@ bool Dictionary::iterator::operator!=(const iterator &other) {
 }
 
 Dictionary::iterator Dictionary::begin() const {
-
+  iter.
 }
 
 Dictionary::iterator Dictionary::end() const {
