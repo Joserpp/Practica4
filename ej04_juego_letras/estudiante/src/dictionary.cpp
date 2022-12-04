@@ -186,7 +186,6 @@ Dictionary::iterator &Dictionary::iterator::operator++() {
 		}
 		else
 			palabra.pop_back();
-
 	}while(!(*iter).valid_word);
 
 	curr_word = palabra;
@@ -203,8 +202,10 @@ bool Dictionary::iterator::operator!=(const iterator &other) {
 }
 
 Dictionary::iterator Dictionary::begin() const {
-  iterator i;
-  i.iter = (words.cbegin_preorder());
+  //iterator i(words.cbegin_preorder());
+ iterator i(words.cbegin_preorder());
+  
+  return i;
 }
 
 Dictionary::iterator Dictionary::end() const {
