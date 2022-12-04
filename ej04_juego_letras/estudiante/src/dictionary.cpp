@@ -164,19 +164,32 @@ Dictionary::iterator::iterator(tree<char_info>::const_preorder_iterator otro): i
 
 std::string Dictionary::iterator::operator*() {
 
-  return curr_word;
+  	return curr_word;
 }
 
 Dictionary::iterator &Dictionary::iterator::operator++() {
 
-  for(tree<char_info>::const_preorder_iterator otro=iter;(*otro).valid_word==true; ++otro){
-    
-    //Falta comprobacion del nivel en el que estamos hay una funcion get level()
-    
-    if()
-    curr_word+=(*otro).character;
-    
-  }
+	string palabra;
+
+	do{
+		int nivel_ant, nivel_post;
+		nivel_ant = iter.get_level();
+		++iter;
+		nivel_post = iter.get_level();
+
+		if(nivel_ant < nivel_post){
+			palabra += (*iter).character;
+		}
+		else if(nivel_ant == nivel_post){
+			palabra.pop_back();
+			palabra += (*iter).character;
+		}
+		else
+			palabra.pop_back();
+
+	}while(!(*iter).valid_word);
+
+	curr_word = palabra;
 
 }
 
@@ -190,7 +203,8 @@ bool Dictionary::iterator::operator!=(const iterator &other) {
 }
 
 Dictionary::iterator Dictionary::begin() const {
-  iter.
+  iterator i;
+  i.iter = (words.cbegin_preorder());
 }
 
 Dictionary::iterator Dictionary::end() const {
