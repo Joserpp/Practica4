@@ -87,8 +87,8 @@ std::pair<int, int> Dictionary::getTotalUsages(node curr_node, char c){
 
   //numero de
   
-  if (*(curr_node)==c)
-    while(curr_node.left_child().)
+  if (curr_node.operator*().character==c)
+    while(curr_node.left_child().operator*().valid_word==true)
         pareja.first+=1;
 
   if (*(curr_node)==true)
