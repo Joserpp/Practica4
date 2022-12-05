@@ -102,6 +102,7 @@ std::pair<int, int> Dictionary::getTotalUsages(node curr_node, char c){
 //                              Public functions                             //
 ///////////////////////////////////////////////////////////////////////////////
 
+
 Dictionary::Dictionary()
 {
   this->words.set_root(char_info());
@@ -225,11 +226,7 @@ int Dictionary::getTotalUsages(const char c){
 
 Dictionary::iterator::iterator() : iter() {}
 
-Dictionary::iterator::iterator(tree<char_info>::const_preorder_iterator otro) : iter(otro)
-{
-
-curr_word=" ";
-}
+Dictionary::iterator::iterator(tree<char_info>::const_preorder_iterator otro) : iter(otro){}
 
 std::string Dictionary::iterator::operator*()
 {
@@ -260,7 +257,7 @@ Dictionary::iterator &Dictionary::iterator::operator++()
     }
     else
       palabra.pop_back();
-  } while (!(*iter).valid_word);
+  } while(!(*iter).valid_word);
 
   curr_word = palabra;
 }
