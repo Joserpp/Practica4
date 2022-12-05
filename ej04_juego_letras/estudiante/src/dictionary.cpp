@@ -66,10 +66,37 @@ int Dictionary::getOccurrences(node curr_node, char c)
   return contador;
 }
 
-/*
-std::pair<int, int> Dictionary::getTotalUsages(node curr_node, char c){
 
-}*/
+std::pair<int, int> Dictionary::getTotalUsages(node curr_node, char c){
+  pair<int,int> pareja;
+
+//hay que recorrer los nodos
+
+//Llamamos de forma recursiva a la funcion sobre el hermano de la derecha y el hijo a la izqueirda
+  int total_izquierda=0;
+  int total_derecha=0;
+
+  if(!curr_node.left_child().is_null())
+    total_izquierda=getTotalUsages(curr_node.left_child(),c);
+
+  if(!curr_node.right_sibling().is_null())
+    total_derecha=getTotalUsages(curr_node.right_sibling(),c);
+
+  //numero de usos=suma del numero de usos de nuestro hermano a la derecha
+  //e hijo a la izquierda
+
+  //numero de
+  
+  if (*(curr_node)==c)
+    while(curr_node.left_child().)
+        pareja.first+=1;
+
+  if (*(curr_node)==true)
+
+
+  
+
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 //                              Public functions                             //
@@ -201,7 +228,7 @@ Dictionary::iterator::iterator() : iter() {}
 Dictionary::iterator::iterator(tree<char_info>::const_preorder_iterator otro) : iter(otro)
 {
 
-  // curr_word = (*iter).character;
+curr_word=" ";
 }
 
 std::string Dictionary::iterator::operator*()
