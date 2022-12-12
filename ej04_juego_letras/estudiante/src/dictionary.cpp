@@ -73,8 +73,8 @@ std::pair<int, int> Dictionary::getTotalUsages(node curr_node, char c){
 //hay que recorrer los nodos
 
 //Llamamos de forma recursiva a la funcion sobre el hermano de la derecha y el hijo a la izqueirda
-  int total_izquierda=0;
-  int total_derecha=0;
+  pair<int,int> total_izquierda;
+  pair<int,int> total_derecha; 
 
   if(!curr_node.left_child().is_null())
     total_izquierda=getTotalUsages(curr_node.left_child(),c);
@@ -82,20 +82,19 @@ std::pair<int, int> Dictionary::getTotalUsages(node curr_node, char c){
   if(!curr_node.right_sibling().is_null())
     total_derecha=getTotalUsages(curr_node.right_sibling(),c);
 
-  //numero de usos=suma del numero de usos de nuestro hermano a la derecha
-  //e hijo a la izquierda
-
-  //numero de
+  pareja.first=total_izquierda.first + total_derecha.first;
+  pareja.second=total_izquierda.second + total_derecha.second;
   
   if (curr_node.operator*().character==c)
-    while(curr_node.left_child().operator*().valid_word==true)
+    pareja.first+=total_izquierda.second;
+
+    if(curr_node.operator*().valid_word){
+      pareja.second+=1;
+      if(curr_node.operator*().character == c)
         pareja.first+=1;
+    }
 
-  if (*(curr_node)==true)
-
-
-  
-
+  return pareja;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -275,7 +274,6 @@ bool Dictionary::iterator::operator!=(const iterator &other)
 
 Dictionary::iterator Dictionary::begin() const
 {
-  // iterator i(words.cbegin_preorder());
   iterator i(words.cbegin_preorder());
 
   return i;
