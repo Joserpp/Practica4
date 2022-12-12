@@ -2,7 +2,7 @@
 #include <iostream>
 
 #include "dictionary.h"
-#include "LettersSet.h"
+#include "letters_set.h"
 
 using namespace std;
 
@@ -15,5 +15,6 @@ int main(int argc, char *argv[])
         return EXIT_FAILURE;
     }
 
-    
+    LetterSet letterset;
+    Dictionary
 }
