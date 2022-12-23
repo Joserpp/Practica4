@@ -229,14 +229,13 @@ Dictionary::iterator::iterator(tree<char_info>::const_preorder_iterator otro) : 
 
 std::string Dictionary::iterator::operator*()
 {
-
   return curr_word;
 }
 
 Dictionary::iterator &Dictionary::iterator::operator++()
 {
 
-  string palabra;
+  string palabra="";
 
   do
   {

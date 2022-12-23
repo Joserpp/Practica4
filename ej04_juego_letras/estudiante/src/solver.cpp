@@ -16,9 +16,51 @@ using namespace std;
 
     pair<vector<string>,int> Solver::getSolutions(const vector<char> & available_letters, bool score_game){
 
+        vector<char> aux = available_letters;
+        vector<pair<string,int>> vector_sol;
         if(score_game){
+            
+            
+            Dictionary::iterator iter = diccionario.begin();
 
-            iterator t = diccionario.begin();
+            ++iter;
+            bool encontrado=false;
+            while((*iter) != ""){
+                string palabra = "";
+                for(int i=0;i<iter.operator*().size();i++){
+                    for(int j=0; j<available_letters.size() && !encontrado; j++){
+
+                        if((*iter)[i] == aux[j]){
+                            palabra.push_back(aux[j]);
+                            aux.erase(aux.begin() + j);
+                            encontrado = true;
+                        }
+                    }
+                }
+
+                if(palabra == (*iter)){
+
+                    int puntuacion = conjunto_letras.getScore(palabra);
+                    
+                    if(vector_sol[0].second == puntuacion){
+                        
+                        pair<string, int> pal_punt(palabra, puntuacion);
+
+                        vector_sol.push_back(pal_punt);
+                    }   
+                    
+                    else if(vector_sol[0].second < puntuacion){
+
+                        vector_sol.clear();
+                        
+                        pair<string, int> pal_punt(palabra, puntuacion);
+                        
+                        vector_sol.push_back(pal_punt);
+                    }
+               }
+
+                ++iter;
+            }
             
         }
         else{}
