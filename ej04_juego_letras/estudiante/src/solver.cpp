@@ -14,7 +14,12 @@ using namespace std;
         conjunto_letras=letters_set;
     }
 
-    pair<vector<string>,int> Solver::getSolutions(const vector<char> & available_letters,bool score_game){
+    pair<vector<string>,int> Solver::getSolutions(const vector<char> & available_letters, bool score_game){
 
-        diccionario.
+        if(score_game){
+
+            iterator t = diccionario.begin();
+            
+        }
+        else{}
     }
