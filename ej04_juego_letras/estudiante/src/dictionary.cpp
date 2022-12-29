@@ -289,18 +289,9 @@ Dictionary::iterator Dictionary::end() const
 //                            Letters Iterator                               //
 ///////////////////////////////////////////////////////////////////////////////
 
-Dictionary::possible_words_iterator Dictionary::possible_words_begin(vector<char> available_characters) const {
+//Dictionary::possible_words_iterator Dictionary::possible_words_begin(vector<char> available_characters) const{}
 
-  possible_words_iterator i(words.cbegin_preorder());
-
-  return i;
-}
-
-Dictionary::possible_words_iterator Dictionary::possible_words_end() const {
-
-	possible_words_iterator i(words.cend_preorder());
-	return i;
-}
+//Dictionary::possible_words_iterator Dictionary::possible_words_end() const{}
 
 Dictionary::possible_words_iterator::possible_words_iterator(){}
 
@@ -351,7 +342,7 @@ std::multiset<char>::iterator it;
 
 	// si está 
 	// current_node.lefth
-}
+
 
 std::string Dictionary::possible_words_iterator::operator*() const {
 
