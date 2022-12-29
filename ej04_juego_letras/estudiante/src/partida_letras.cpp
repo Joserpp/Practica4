@@ -1,7 +1,10 @@
 #include <fstream>
 #include <iostream>
 
+#include "letters_set.h"
 #include "solver.h"
+#include "dictionary.h"
+#include "vector"
 
 using namespace std;
 
@@ -33,14 +36,47 @@ int main(int argc, char *argv[])
 
     f_conjuntoletras >> conjunto_letras;
 
+    vector<char> letras_partida;
 
+    char letra;
 
-  Dictionary diccionario;
-  f_diccionario >> diccionario;
+    for(int i=0;i<atoi(argv[4]);i++){
+      f_conjuntoletras>>letra;
+      letras_partida.push_back(letra);
+    }
 
-  for (Dictionary::iterator it = diccionario.begin(); it != diccionario.end(); ++it){
-    cout << *it << endl;
+  char modo_juego=*argv[3];
+
+  bool modo;
+  if(modo_juego=='L'){
+    modo=true;
   }
+  else
+    modo=false;
+
+  pair<vector<string>,int> soluciones;
+
+  Solver solver(diccionario,conjunto_letras);
+
+  soluciones = solver.getSolutions(letras_partida,modo);
+
+
+
+  cout<<"LETRAS DISPONIBLES:"<<endl;
+
+  for(int i=0;i<letras_partida.size();i++){
+    cout<<letras_partida[i]<<" ";
+  }
+
+  cout<<"SOLUCIONES: "<<endl;
+
+  for(int i=0;i<soluciones.first.size();i++){
+    cout<<soluciones.first[i]<<endl;
+  }
+
+  cout<<"PUNTUACION: ";
+  cout<<soluciones.second;
+
 
   return 0;
 }

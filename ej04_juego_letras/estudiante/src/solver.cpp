@@ -18,25 +18,27 @@ using namespace std;
 
         vector<char> aux = available_letters;
         vector<pair<string,int>> vector_sol;
-        if(score_game){
+
             
             
-            Dictionary::iterator iter = diccionario.begin();
+        Dictionary::iterator iter = diccionario.begin();
 
-            ++iter;
-            bool encontrado=false;
-            while((*iter) != ""){
-                string palabra = "";
-                for(int i=0;i<iter.operator*().size();i++){
-                    for(int j=0; j<available_letters.size() && !encontrado; j++){
+        ++iter;
+        bool encontrado=false;
+        while((*iter) != ""){
+            string palabra = "";
+            for(int i=0;i<iter.operator*().size();i++){
+                for(int j=0; j<available_letters.size() && !encontrado; j++){
 
-                        if((*iter)[i] == aux[j]){
-                            palabra.push_back(aux[j]);
-                            aux.erase(aux.begin() + j);
-                            encontrado = true;
-                        }
+                    if((*iter)[i] == aux[j]){
+                        palabra.push_back(aux[j]);
+                        aux.erase(aux.begin() + j);
+                        encontrado = true;
                     }
                 }
+            }
+
+            if(score_game){
 
                 if(palabra == (*iter)){
 
@@ -57,11 +59,32 @@ using namespace std;
                         
                         vector_sol.push_back(pal_punt);
                     }
-               }
+                }
 
                 ++iter;
             }
-            
+            else{
+
+                if(palabra == (*iter)){
+
+                    int longitud = palabra.length();
+                    
+                    if(vector_sol[0].second == longitud){
+                        
+                        pair<string, int> pal_punt(palabra, longitud);
+
+                        vector_sol.push_back(pal_punt);
+                    }   
+                    
+                    else if(vector_sol[0].second < longitud){
+
+                        vector_sol.clear();
+                        
+                        pair<string, int> pal_punt(palabra, longitud);
+                        
+                        vector_sol.push_back(pal_punt);
+                    }
+                }
+            }
         }
-        else{}
     }

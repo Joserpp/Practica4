@@ -289,29 +289,42 @@ Dictionary::iterator Dictionary::end() const
 //                            Letters Iterator                               //
 ///////////////////////////////////////////////////////////////////////////////
 
-/*
 Dictionary::possible_words_iterator Dictionary::possible_words_begin(vector<char> available_characters) const {
 
+  possible_words_iterator i(words.cbegin_preorder());
+
+  return i;
 }
 
 Dictionary::possible_words_iterator Dictionary::possible_words_end() const {
 
+	possible_words_iterator i(words.cend_preorder());
+	return i;
 }
 
-Dictionary::possible_words_iterator::possible_words_iterator() {
-
-}
+Dictionary::possible_words_iterator::possible_words_iterator(){}
 
 Dictionary::possible_words_iterator::possible_words_iterator(node current_node, vector<char> available_letters){
 
+	this->current_node = current_node;
+	for(int i=0;i<available_letters.size();i++){
+    	this->available_letters.emplace(available_letters[i]);
+  	}
+
+  
 }
 
 Dictionary::possible_words_iterator::possible_words_iterator(const possible_words_iterator &other){
-
+	this->current_node = other.current_node;
+	this->available_letters=other.available_letters;
+	this->level = other.level;
+	this->current_word = other.current_word;
 }
 
 Dictionary::possible_words_iterator &Dictionary::possible_words_iterator::operator=(const Dictionary::possible_words_iterator &other) {
+	possible_words_iterator iter(other);
 
+	return iter;
 }
 
 bool Dictionary::possible_words_iterator::operator==(const Dictionary::possible_words_iterator &other) const {
@@ -324,8 +337,22 @@ bool Dictionary::possible_words_iterator::operator!=(const Dictionary::possible_
 
 Dictionary::possible_words_iterator &Dictionary::possible_words_iterator::operator++() {
 
+	char caracter_actual = *(*current_node);
+std::multiset<char>::iterator it;
+	if(it=available_letters.find(caracter_actual); it!= available_letters.end()){
+
+		
+	}
+	}
+
+	// no está  
+
+	// current_node.right_sibling
+
+	// si está 
+	// current_node.lefth
 }
 
 std::string Dictionary::possible_words_iterator::operator*() const {
 
-}*/
+}
