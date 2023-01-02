@@ -1,4 +1,4 @@
-#include "letters_set.h"
+#include "letter_set.h"
 #include <iostream>
 #include "string.h"
 #include <map>
@@ -75,10 +75,17 @@ LetterSet & LetterSet::operator=(const LetterSet & cl){
 }
 
 LetterInfo & LetterSet::operator[](const char & val){
-    for (map<char, LetterInfo>::iterator pos = letters.begin(); pos != letters.end() && val >= 0 && val < letters.size(); ++pos)
+
+    LetterInfo solucion;
+
+    bool condicion=true;
+    for (map<char, LetterInfo>::iterator pos = letters.begin(); pos != letters.end() && val >= 0 && val < letters.size() && condicion; ++pos)
         if (pos->first == val) {
-            return pos->second;
+            condicion=false;
+            solucion=pos->second;
         }
+
+    return solucion;
 }
 
 ostream & operator<<(ostream & os, const LetterSet & cl){

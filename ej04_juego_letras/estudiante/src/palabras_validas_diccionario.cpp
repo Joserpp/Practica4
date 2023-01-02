@@ -31,7 +31,8 @@ int main(int argc, char *argv[])
 
   for (auto word: available_words){
     cout << word << endl;
-  }*/
-
+  }
+*/
   return 0;
+  
 }

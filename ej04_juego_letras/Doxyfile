@@ -1,0 +1,6 @@
+PROJECT_NAME           = "Práctica 5. Juego de las Letras - Árbol para Diccionario"
+OUTPUT_DIRECTORY       = /home/alonso/ED/practica5/Practica4/ej04_juego_letras/doc_doxygen/
+INPUT                  = /home/alonso/ED/practica5/Practica4/ej04_juego_letras/estudiante/include /home/alonso/ED/practica5/Practica4/ej04_juego_letras/estudiante/src /home/alonso/ED/practica5/Practica4/ej04_juego_letras/estudiante/doc
+GENERATE_LATEX         = NO
+IMAGE_PATH             = /home/alonso/ED/practica5/Practica4/ej04_juego_letras/estudiante/doc
+EXTRACT_PRIVATE	       = NO

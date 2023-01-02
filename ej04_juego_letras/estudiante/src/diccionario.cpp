@@ -7,6 +7,7 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
+  
   if(argc != 2){
     cout << "Los parametros son: " << endl;
     cout << "1.- El fichero con el diccionario" << endl;
@@ -24,8 +25,12 @@ int main(int argc, char *argv[])
   f_diccionario >> diccionario;
 
   for (Dictionary::iterator it = diccionario.begin(); it != diccionario.end(); ++it){
-    cout << *it << endl;
+    if(it != diccionario.begin())
+      cout << *it << endl;
   }
-
+  
   return 0;
+
+  
 }
+

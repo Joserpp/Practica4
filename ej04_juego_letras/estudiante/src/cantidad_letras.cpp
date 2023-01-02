@@ -2,7 +2,7 @@
 #include <iostream>
 
 #include "dictionary.h"
-#include "letters_set.h"
+#include "letter_set.h"
 
 using namespace std;
 
@@ -33,15 +33,18 @@ int main(int argc, char *argv[])
 
     char letra='a';
 
-    cout << "LETRA  USOS  OCURRENCIAS "<< endl;
+    cout << "Letra Usos Ocurrencias "<< endl;
 
     while(letra!='{'){
 
-        solucion.first=diccionario.getOccurrences(letra);
         solucion.second=diccionario.getTotalUsages(letra);
+        solucion.first=diccionario.getOccurrences(letra);
 
-        cout << "" <<letra<< "  "<<solucion.first<< "  "<<solucion.second<<endl;
-
+        if(solucion.second!=0 || solucion.first!=0){
+            char car=toupper(letra);
+            cout << car << " " << solucion.second << " " << solucion.first << endl;
+        }
+        
         letra++;
     }
 

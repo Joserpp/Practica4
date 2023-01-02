@@ -4,8 +4,8 @@
 #include <set>
 #include "dictionary.h"
 #include <cmath>
-#include <letters_set.h>
-#include <solver.h>
+#include "letter_set.h"
+#include "solver.h"
 
 using namespace std;
 
@@ -16,75 +16,80 @@ using namespace std;
 
     pair<vector<string>,int> Solver::getSolutions(const vector<char> & available_letters, bool score_game){
 
-        vector<char> aux = available_letters;
-        vector<pair<string,int>> vector_sol;
+        pair<vector<string>, int> result;
 
-            
-            
         Dictionary::iterator iter = diccionario.begin();
 
+        
         ++iter;
-        bool encontrado=false;
-        while((*iter) != ""){
+        while(iter != diccionario.end()){
+            vector<char> aux = available_letters;
             string palabra = "";
-            for(int i=0;i<iter.operator*().size();i++){
-                for(int j=0; j<available_letters.size() && !encontrado; j++){
+            string pal = iter.operator*();
 
-                    if((*iter)[i] == aux[j]){
+            for(int i=0;i<pal.size();i++){
+                bool encontrado = false;
+                for(int j=0; j<aux.size() && !encontrado; j++){
+
+                    if(pal[i] == aux[j]){
                         palabra.push_back(aux[j]);
                         aux.erase(aux.begin() + j);
                         encontrado = true;
+                
                     }
                 }
             }
 
-            if(score_game){
+            bool controlador = false;
 
-                if(palabra == (*iter)){
+            
 
-                    int puntuacion = conjunto_letras.getScore(palabra);
-                    
-                    if(vector_sol[0].second == puntuacion){
-                        
-                        pair<string, int> pal_punt(palabra, puntuacion);
-
-                        vector_sol.push_back(pal_punt);
-                    }   
-                    
-                    else if(vector_sol[0].second < puntuacion){
-
-                        vector_sol.clear();
-                        
-                        pair<string, int> pal_punt(palabra, puntuacion);
-                        
-                        vector_sol.push_back(pal_punt);
-                    }
-                }
-
-                ++iter;
+            if(palabra == pal){
+                controlador = true;
             }
-            else{
 
-                if(palabra == (*iter)){
-
-                    int longitud = palabra.length();
+            if(score_game && controlador){
+                
+                int puntuacion = conjunto_letras.getScore(palabra);
+                
+                if(result.second == puntuacion){
                     
-                    if(vector_sol[0].second == longitud){
-                        
-                        pair<string, int> pal_punt(palabra, longitud);
+                    result.first.push_back(palabra);
+                }   
+                
+                else if(result.second < puntuacion){
 
-                        vector_sol.push_back(pal_punt);
-                    }   
+                    result.first.clear();
                     
-                    else if(vector_sol[0].second < longitud){
+                    result.second = puntuacion;
+                    
+                    result.first.push_back(palabra);
 
-                        vector_sol.clear();
-                        
-                        pair<string, int> pal_punt(palabra, longitud);
-                        
-                        vector_sol.push_back(pal_punt);
-                    }
                 }
             }
+            else if(!score_game && controlador){
+                
+                int longitud = palabra.length();
+                
+                if(result.second == longitud){
+
+                    result.first.push_back(palabra);
+                }   
+                
+                else if(result.second < longitud){
+                
+                    result.first.clear();
+                    
+                    result.second = longitud;
+                    
+                    result.first.push_back(palabra);
+                }
+                
+            }
+            
+            ++iter;
         }
+
+        
+        return result;
     }

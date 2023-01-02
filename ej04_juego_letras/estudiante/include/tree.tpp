@@ -5,6 +5,8 @@
 #include "tree.h"
 #include <iostream>
 
+using namespace std;
+
 template <typename T>
 void tree<T>::destroy(node &n){
   if (!n.is_null()){
@@ -325,6 +327,7 @@ template<typename T>
 typename tree<T>::const_preorder_iterator &
 tree<T>::const_preorder_iterator::operator++() {
   if (!this->current.is_null()) {
+    
     if (!this->current.left_child().is_null()) {
       this->current = this->current.left_child();
       this->level++;
@@ -344,6 +347,9 @@ tree<T>::const_preorder_iterator::operator++() {
       }
     }
   }
+
+  
+
   return *this;
 }
 

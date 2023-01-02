@@ -1,16 +1,17 @@
 #include <fstream>
 #include <iostream>
 
-#include "letters_set.h"
+#include "letter_set.h"
 #include "solver.h"
 #include "dictionary.h"
 #include "vector"
+#include "letters_bag.h"
 
 using namespace std;
 
 int main(int argc, char *argv[])
 {
-  if(argc != 3){
+  if(argc != 5){
     cout << "Los parametros son: " << endl;
     cout << "1.- El fichero con el diccionario" << endl;
     cout << "2.- Contiene las letras y su puntuacion" << endl;
@@ -34,25 +35,29 @@ int main(int argc, char *argv[])
   while(f_diccionario >> cad)
         diccionario.insert(cad);
 
-    f_conjuntoletras >> conjunto_letras;
+  f_conjuntoletras >> conjunto_letras;
 
-    vector<char> letras_partida;
+  LettersBag bolsa_letras(conjunto_letras);
 
-    char letra;
+  vector<char> letras_partida = bolsa_letras.extractLetters(atoi(argv[4]));
 
-    for(int i=0;i<atoi(argv[4]);i++){
-      f_conjuntoletras>>letra;
-      letras_partida.push_back(letra);
-    }
+  cout<<"LETRAS DISPONIBLES:"<<endl;
+
+  for(int i=0;i<letras_partida.size();i++){
+    char let = toupper(letras_partida[i]);
+    cout<<let<<" ";
+  }
+
+  cout << endl;
 
   char modo_juego=*argv[3];
 
   bool modo;
   if(modo_juego=='L'){
-    modo=true;
-  }
-  else
     modo=false;
+  }
+  else if(modo_juego == 'P')
+    modo=true;
 
   pair<vector<string>,int> soluciones;
 
@@ -60,14 +65,7 @@ int main(int argc, char *argv[])
 
   soluciones = solver.getSolutions(letras_partida,modo);
 
-
-
-  cout<<"LETRAS DISPONIBLES:"<<endl;
-
-  for(int i=0;i<letras_partida.size();i++){
-    cout<<letras_partida[i]<<" ";
-  }
-
+  cout << endl;
   cout<<"SOLUCIONES: "<<endl;
 
   for(int i=0;i<soluciones.first.size();i++){
@@ -76,7 +74,6 @@ int main(int argc, char *argv[])
 
   cout<<"PUNTUACION: ";
   cout<<soluciones.second;
-
 
   return 0;
 }

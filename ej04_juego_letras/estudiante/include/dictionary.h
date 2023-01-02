@@ -223,7 +223,7 @@ public:
     iterator end() const;
 
     ///////////////////////////////////////////////// Letters Iterator /////////////////////////////////////////////////
-
+/*
     class possible_words_iterator {
     public:
         possible_words_iterator();
@@ -253,6 +253,8 @@ public:
     possible_words_iterator possible_words_begin(vector<char> available_characters) const;
 
     possible_words_iterator possible_words_end() const;
+
+    */
 };
 
 #endif //TREE_DICTIONARY_HPP

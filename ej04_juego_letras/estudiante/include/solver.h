@@ -4,7 +4,7 @@
 #include <set>
 #include "dictionary.h"
 #include <cmath>
-#include <letters_set.h>
+#include "letter_set.h"
 
 using namespace std;
 

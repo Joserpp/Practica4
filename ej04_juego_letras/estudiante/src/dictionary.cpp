@@ -6,8 +6,8 @@
 #include <vector>
 #include <utility>
 #include <set>
-#include "dictionary.h"
 #include <cmath>
+#include "dictionary.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 //                             Private functions                             //
@@ -55,7 +55,7 @@ int Dictionary::getOccurrences(node curr_node, char c)
 {
   int contador=0;
 
-  if (*(curr_node)==c)
+  if (curr_node.operator*().character==c)
     contador++;
   if(!curr_node.left_child().is_null())
     contador+=getOccurrences(curr_node.left_child(),c);
@@ -68,19 +68,20 @@ int Dictionary::getOccurrences(node curr_node, char c)
 
 
 std::pair<int, int> Dictionary::getTotalUsages(node curr_node, char c){
-  pair<int,int> pareja;
+  pair<int,int> pareja(0,0);
 
 //hay que recorrer los nodos
 
 //Llamamos de forma recursiva a la funcion sobre el hermano de la derecha y el hijo a la izqueirda
-  pair<int,int> total_izquierda;
-  pair<int,int> total_derecha; 
+  pair<int,int> total_izquierda(0,0);
+  pair<int,int> total_derecha(0,0); 
+
+  if(!curr_node.right_sibling().is_null())
+    total_derecha=getTotalUsages(curr_node.right_sibling(),c);
 
   if(!curr_node.left_child().is_null())
     total_izquierda=getTotalUsages(curr_node.left_child(),c);
 
-  if(!curr_node.right_sibling().is_null())
-    total_derecha=getTotalUsages(curr_node.right_sibling(),c);
 
   pareja.first=total_izquierda.first + total_derecha.first;
   pareja.second=total_izquierda.second + total_derecha.second;
@@ -187,12 +188,12 @@ Dictionary &Dictionary::operator=(const Dictionary &dic)
 //                               I/O overload                                //
 ///////////////////////////////////////////////////////////////////////////////
 
-/*std::ostream& operator<<(std::ostream &os, const Dictionary &dict){
+std::ostream& operator<<(std::ostream &os, const Dictionary &dict){
   for(Dictionary::iterator it = dict.begin();it != dict.end(); ++it){
     os << *it << std::endl;
   }
   return os;
-}*/
+}
 
 std::istream &operator>>(std::istream &is, Dictionary &dict)
 {
@@ -214,16 +215,20 @@ int Dictionary::getOccurrences(const char c){
   contador=this->getOccurrences(words.get_root(),c);
   return contador;
 }
-/*
-int Dictionary::getTotalUsages(const char c){
 
-}*/
+int Dictionary::getTotalUsages(const char c){
+  pair<int,int> contador;
+  contador=this->getTotalUsages(words.get_root(),c);
+  return contador.first;
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 //                                 Iterator                                  //
 ///////////////////////////////////////////////////////////////////////////////
 
-Dictionary::iterator::iterator() : iter() {}
+Dictionary::iterator::iterator() : iter() {
+  curr_word="";
+}
 
 Dictionary::iterator::iterator(tree<char_info>::const_preorder_iterator otro) : iter(otro){}
 
@@ -235,31 +240,48 @@ std::string Dictionary::iterator::operator*()
 Dictionary::iterator &Dictionary::iterator::operator++()
 {
 
-  string palabra="";
+  int nivel_ant, nivel_post;
 
   do
   {
-    int nivel_ant, nivel_post;
     nivel_ant = iter.get_level();
+
     ++iter;
+    
     nivel_post = iter.get_level();
+    
+
+    if(nivel_post==0)
+      break;
 
     if (nivel_ant < nivel_post)
     {
-      palabra += (*iter).character;
+  
+      char car = iter.operator*().character;
+      curr_word.push_back(car);
     }
     else if (nivel_ant == nivel_post)
     {
-      palabra.pop_back();
-      palabra += (*iter).character;
+      curr_word.pop_back();
+      char car = iter.operator*().character;
+      curr_word.push_back(car);
     }
-    else
-      palabra.pop_back();
-  } while(!(*iter).valid_word);
+    else if(nivel_ant > nivel_post){
+      int var = nivel_ant - nivel_post;
+      
+      for(int i=0;i<=var;i++)
+        curr_word.pop_back();
+      
+      char car = iter.operator*().character;
+      curr_word.push_back(car);
+    }
+    
+    
+  } while(!iter.operator*().valid_word );
 
-  curr_word = palabra;
+  
+  return *this;
 }
-
 bool Dictionary::iterator::operator==(const iterator &other)
 {
 
@@ -274,7 +296,7 @@ bool Dictionary::iterator::operator!=(const iterator &other)
 Dictionary::iterator Dictionary::begin() const
 {
   iterator i(words.cbegin_preorder());
-
+  //++i;
   return i;
 }
 
@@ -288,6 +310,8 @@ Dictionary::iterator Dictionary::end() const
 ///////////////////////////////////////////////////////////////////////////////
 //                            Letters Iterator                               //
 ///////////////////////////////////////////////////////////////////////////////
+
+/*
 
 //Dictionary::possible_words_iterator Dictionary::possible_words_begin(vector<char> available_characters) const{}
 
@@ -347,3 +371,5 @@ std::multiset<char>::iterator it;
 std::string Dictionary::possible_words_iterator::operator*() const {
 
 }
+
+*/

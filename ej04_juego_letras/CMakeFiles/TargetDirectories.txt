@@ -1,0 +1,7 @@
+/home/alonso/ED/practica5/Practica4/ej04_juego_letras/CMakeFiles/cantidad_letras.dir
+/home/alonso/ED/practica5/Practica4/ej04_juego_letras/CMakeFiles/diccionario.dir
+/home/alonso/ED/practica5/Practica4/ej04_juego_letras/CMakeFiles/partida_letras.dir
+/home/alonso/ED/practica5/Practica4/ej04_juego_letras/CMakeFiles/palabras_validas_diccionario.dir
+/home/alonso/ED/practica5/Practica4/ej04_juego_letras/CMakeFiles/doc_doxygen.dir
+/home/alonso/ED/practica5/Practica4/ej04_juego_letras/CMakeFiles/edit_cache.dir
+/home/alonso/ED/practica5/Practica4/ej04_juego_letras/CMakeFiles/rebuild_cache.dir

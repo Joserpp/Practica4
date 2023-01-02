@@ -9,7 +9,7 @@
  */
 
 #include "bag.h"
-#include "letters_set.h"
+#include "letter_set.h"
 #include <stdlib.h>
 #include <time.h>
 #include <vector>
